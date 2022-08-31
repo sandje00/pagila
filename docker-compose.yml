@@ -12,3 +12,21 @@ services:
       POSTGRES_DB: ${POSTGRES_DB?err}
     ports:
       - 3000:5432
+
+  server:
+    build: ./server
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    restart: on-failure
+    environment:
+      POSTGRES_HOST: ${POSTGRES_HOST?err}
+      POSTGRES_PORT: ${POSTGRES_PORT?err}
+      POSTGRES_USER: ${POSTGRES_USER?err}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD?err}
+      POSTGRES_DB: ${POSTGRES_DB?err}
+      PORT: ${PORT}
+    ports:
+      - 3001:3001
+    depends_on:
+      - db
