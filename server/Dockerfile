@@ -10,4 +10,6 @@ COPY . .
 
 EXPOSE 3001
 
-CMD ["npm", "run", "dev"]
+COPY docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
