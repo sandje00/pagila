@@ -1,4 +1,4 @@
-module.exports = {
+const development = {
   client: 'pg',
   connection: {
     host: process.env.POSTGRES_HOST,
@@ -8,4 +8,8 @@ module.exports = {
     database: process.env.POSTGRES_DATABASE,
   },
   searchPath: ['knex', 'public'],
+};
+
+module.exports = {
+  development,
 };

@@ -3,7 +3,9 @@ import knex from 'knex';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const knexfile = require('../../knexfile');
 
-const db = knex(knexfile);
+const environment = process.env.ENVIRONMENT || 'development';
+
+const db = knex(knexfile[environment]);
 
 export default db;
 
