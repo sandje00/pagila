@@ -1,5 +1,5 @@
-import db from 'database';
-import { FILM_TABLE_NAME } from 'constants/tableNames';
+import db from 'shared/database';
+import { FILM_TABLE_NAME } from 'shared/constants/tableNames';
 
 function getAllFilms(startId: number, limit: number) {
   return db(FILM_TABLE_NAME)

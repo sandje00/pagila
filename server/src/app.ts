@@ -1,4 +1,4 @@
-import { dbAuthenticate } from 'database';
+import { dbAuthenticate } from 'shared/database';
 import express from 'express';
 import router from 'router';
 

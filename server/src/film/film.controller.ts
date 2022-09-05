@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { FILMS_LIMIT } from 'constants/limits';
+import { FILMS_LIMIT } from 'shared/constants/limits';
 import filmService from './film.service';
 
 async function getAll(req: Request, res: Response) {
