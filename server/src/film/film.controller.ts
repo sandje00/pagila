@@ -4,7 +4,7 @@ import filmService from './film.service';
 
 async function getAll(req: Request, res: Response) {
   const startId = Number(req.query.startId);
-  const films = await filmService.getAllFilms(startId, FILMS_LIMIT);
+  const films = await filmService.getAllFilms(FILMS_LIMIT, startId);
   return res.status(200).json({ films });
 }
 
