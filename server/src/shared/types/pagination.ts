@@ -11,15 +11,26 @@ interface IDeferredJoinParams extends IPaginationParams {
 }
 
 interface IKeysetParams extends IPaginationParams {
-  startId: number;
+  lastId: number;
 }
 
-interface IPaginateRequest {
+interface IPaginationRequest {
   query: {
     limit: string;
-    pageNumber?: string;
-    startId?: string;
+    pageNumber: string;
   };
 }
 
-export { IDeferredJoinParams, IKeysetParams, IPaginateRequest };
+interface IInfiniteScrollRequest {
+  query: {
+    limit: string;
+    lastId: string;
+  };
+}
+
+export {
+  IDeferredJoinParams,
+  IKeysetParams,
+  IPaginationRequest,
+  IInfiniteScrollRequest,
+};

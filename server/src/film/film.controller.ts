@@ -1,12 +1,20 @@
+import {
+  IInfiniteScrollRequest,
+  IPaginationRequest,
+} from 'shared/types/pagination';
 import filmService from './film.service';
-import { IPaginateRequest } from 'shared/types/pagination';
 import { Response } from 'express';
 
-async function getAll(req: IPaginateRequest, res: Response) {
+async function getAll(
+  req: IPaginationRequest & IInfiniteScrollRequest,
+  res: Response,
+) {
   const limit = Number(req.query.limit);
   const pageNumber = Number(req.query.pageNumber);
-  const startId = Number(req.query.startId);
-  const films = await filmService.getAllFilms(limit, pageNumber, startId);
+  const lastId = Number(req.query.lastId);
+  const films =
+    (pageNumber && (await filmService.paginate(limit, pageNumber))) ||
+    (lastId && (await filmService.infiniteScroll(limit, lastId)));
   return res.status(200).json({ films });
 }
 

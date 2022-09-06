@@ -3,19 +3,29 @@ import {
   keysetPagination,
 } from 'shared/query/pagination';
 
-function getAllFilms(limit: number, pageNumber?: number, startId?: number) {
+function paginate(limit: number, pageNumber: number) {
   const params = {
     tableName: 'film',
     indexedColumnName: 'film_id',
     limit,
     orderByDirection: 'asc',
+    pageNumber,
   };
-  return (
-    (pageNumber && deferredJoinPagination({ ...params, pageNumber })) ||
-    (startId && keysetPagination({ ...params, startId }))
-  );
+  return deferredJoinPagination(params);
+}
+
+function infiniteScroll(limit: number, lastId: number) {
+  const params = {
+    tableName: 'film',
+    indexedColumnName: 'film_id',
+    limit,
+    orderByDirection: 'asc',
+    lastId,
+  };
+  return keysetPagination(params);
 }
 
 export default {
-  getAllFilms,
+  paginate,
+  infiniteScroll,
 };

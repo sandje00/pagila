@@ -38,13 +38,13 @@ export function keysetPagination({
   selectAttributes,
   limit,
   orderByDirection,
-  startId,
+  lastId,
 }: IKeysetParams) {
   const attributes = selectAttributes || '*';
   return db
     .select(attributes)
     .from(tableName)
-    .where(indexedColumnName, '>', startId)
+    .where(indexedColumnName, '>', lastId)
     .limit(limit)
     .orderBy(indexedColumnName, orderByDirection);
 }
