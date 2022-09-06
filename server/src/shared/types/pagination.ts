@@ -1,7 +1,7 @@
 interface IPaginateRequest {
   query: {
     limit: string;
-    offset?: string;
+    pageNumber?: string;
     startId?: string;
   };
 }

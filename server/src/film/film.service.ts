@@ -1,7 +1,8 @@
 import db from 'shared/database';
 import { FILM_TABLE_NAME } from 'shared/constants/tableNames';
 
-function getAllFilms(limit: number, offset?: number, startId?: number) {
+function getAllFilms(limit: number, pageNumber?: number, startId?: number) {
+  const offset = pageNumber && (pageNumber - 1) * limit;
   return (
     (offset && deferredJoinPagination(limit, offset)) ||
     (startId && keysetPagination(limit, startId))

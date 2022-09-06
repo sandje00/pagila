@@ -4,9 +4,9 @@ import { IPaginateRequest } from 'shared/types/pagination';
 import { Response } from 'express';
 
 async function getAll(req: IPaginateRequest, res: Response) {
-  const offset = Number(req.query.offset);
+  const pageNumber = Number(req.query.pageNumber);
   const startId = Number(req.query.startId);
-  const films = await filmService.getAllFilms(FILMS_LIMIT, offset, startId);
+  const films = await filmService.getAllFilms(FILMS_LIMIT, pageNumber, startId);
   return res.status(200).json({ films });
 }
 
