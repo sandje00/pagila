@@ -1,42 +1,21 @@
-import db from 'shared/database';
-import { FILM_TABLE_NAME } from 'shared/constants/tableNames';
+import {
+  deferredJoinPagination,
+  keysetPagination,
+} from 'shared/query/pagination';
 
 function getAllFilms(limit: number, pageNumber?: number, startId?: number) {
-  const offset = pageNumber && (pageNumber - 1) * limit;
+  const params = {
+    tableName: 'film',
+    indexedColumnName: 'film_id',
+    limit,
+    orderByDirection: 'asc',
+  };
   return (
-    (offset && deferredJoinPagination(limit, offset)) ||
-    (startId && keysetPagination(limit, startId))
+    (pageNumber && deferredJoinPagination({ ...params, pageNumber })) ||
+    (startId && keysetPagination({ ...params, startId }))
   );
 }
 
 export default {
   getAllFilms,
 };
-
-function deferredJoinPagination(limit: number, offset: number) {
-  return db
-    .with('film_ids_page', db =>
-      db
-        .select('film_id')
-        .from(FILM_TABLE_NAME)
-        .orderBy('film_id')
-        .limit(limit)
-        .offset(offset),
-    )
-    .select('*')
-    .from(FILM_TABLE_NAME)
-    .join(
-      'film_ids_page',
-      'film_ids_page.film_id',
-      '=',
-      `${FILM_TABLE_NAME}.film_id`,
-    )
-    .orderBy(`${FILM_TABLE_NAME}.film_id`, 'asc');
-}
-
-function keysetPagination(limit: number, startId: number) {
-  return db(FILM_TABLE_NAME)
-    .where('film_id', '>', startId)
-    .orderBy('film_id', 'asc')
-    .limit(limit);
-}
