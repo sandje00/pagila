@@ -8,7 +8,7 @@ const development = {
     database: process.env.POSTGRES_DATABASE
   },
   searchPath: ['knex', 'public'],
-  debug: true
+  debug: process.env.ENVIRONMENT === 'development'
 };
 
 module.exports = {
