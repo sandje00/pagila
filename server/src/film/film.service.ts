@@ -1,6 +1,6 @@
 import {
   deferredJoinPagination,
-  keysetPagination,
+  keysetPagination
 } from 'shared/query/pagination';
 
 function paginate(limit: number, pageNumber: number) {
@@ -9,7 +9,7 @@ function paginate(limit: number, pageNumber: number) {
     indexedColumnName: 'film_id',
     limit,
     orderByDirection: 'asc',
-    pageNumber,
+    pageNumber
   };
   return deferredJoinPagination(params);
 }
@@ -20,12 +20,12 @@ function infiniteScroll(limit: number, lastId: number) {
     indexedColumnName: 'film_id',
     limit,
     orderByDirection: 'asc',
-    lastId,
+    lastId
   };
   return keysetPagination(params);
 }
 
 export default {
   paginate,
-  infiniteScroll,
+  infiniteScroll
 };

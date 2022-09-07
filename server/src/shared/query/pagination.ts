@@ -7,7 +7,7 @@ export async function deferredJoinPagination({
   selectAttributes,
   limit,
   orderByDirection,
-  pageNumber,
+  pageNumber
 }: IDeferredJoinParams) {
   const offset = (pageNumber - 1) * limit;
   const innerQueryTableName = `${indexedColumnName}s_page`;
@@ -19,7 +19,7 @@ export async function deferredJoinPagination({
         .from(tableName)
         .orderBy(indexedColumnName)
         .limit(limit)
-        .offset(offset),
+        .offset(offset)
     )
     .select(attributes)
     .from(tableName)
@@ -27,7 +27,7 @@ export async function deferredJoinPagination({
       innerQueryTableName,
       `${innerQueryTableName}.${indexedColumnName}`,
       '=',
-      `${tableName}.${indexedColumnName}`,
+      `${tableName}.${indexedColumnName}`
     )
     .orderBy(`${tableName}.${indexedColumnName}`, orderByDirection);
 }
@@ -38,7 +38,7 @@ export function keysetPagination({
   selectAttributes,
   limit,
   orderByDirection,
-  lastId,
+  lastId
 }: IKeysetParams) {
   const attributes = selectAttributes || '*';
   return db

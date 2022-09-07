@@ -32,5 +32,5 @@ export {
   IDeferredJoinParams,
   IKeysetParams,
   IPaginationRequest,
-  IInfiniteScrollRequest,
+  IInfiniteScrollRequest
 };

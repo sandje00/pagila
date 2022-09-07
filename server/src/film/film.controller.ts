@@ -1,6 +1,6 @@
 import {
   IInfiniteScrollRequest,
-  IPaginationRequest,
+  IPaginationRequest
 } from 'shared/types/pagination';
 import filmService from './film.service';
 import { Response } from 'express';
@@ -21,5 +21,5 @@ async function infiniteScroll(req: IInfiniteScrollRequest, res: Response) {
 
 export default {
   getPage,
-  infiniteScroll,
+  infiniteScroll
 };
