@@ -1,8 +1,13 @@
+enum OrderByDirection {
+  asc = 'asc',
+  desc = 'desc'
+}
+
 interface IPaginationParams {
   tableName: string;
   indexedColumnName: string;
   limit: number;
-  orderByDirection: string;
+  orderByDirection: OrderByDirection;
   selectAttributes?: string[];
 }
 
@@ -29,6 +34,7 @@ interface IInfiniteScrollRequest {
 }
 
 export {
+  OrderByDirection,
   IDeferredJoinParams,
   IKeysetParams,
   IPaginationRequest,
