@@ -17,7 +17,7 @@ export async function deferredJoinPagination({
       db
         .select(indexedColumnName)
         .from(tableName)
-        .orderBy(indexedColumnName)
+        .orderBy(indexedColumnName, orderByDirection)
         .limit(limit)
         .offset(offset)
     )
