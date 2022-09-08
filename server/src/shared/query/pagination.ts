@@ -10,10 +10,10 @@ export async function deferredJoinPagination({
   pageNumber
 }: IDeferredJoinParams) {
   const offset = (pageNumber - 1) * limit;
-  const innerQueryTableName = `${indexedColumnName}s_page`;
+  const innerQueryName = `${indexedColumnName}s_page`;
   const attributes = selectAttributes || '*';
   return db
-    .with(innerQueryTableName, db =>
+    .with(innerQueryName, db =>
       db
         .select(indexedColumnName)
         .from(tableName)
@@ -24,8 +24,8 @@ export async function deferredJoinPagination({
     .select(attributes)
     .from(tableName)
     .join(
-      innerQueryTableName,
-      `${innerQueryTableName}.${indexedColumnName}`,
+      innerQueryName,
+      `${innerQueryName}.${indexedColumnName}`,
       '=',
       `${tableName}.${indexedColumnName}`
     )
